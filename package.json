@@ -1,0 +1,19 @@
+{
+  "name": "blender",
+  "version": "1.0.0",
+  "description": "\"# blender\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nil84/blender.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nil84/blender/issues"
+  },
+  "homepage": "https://github.com/nil84/blender#readme"
+}
