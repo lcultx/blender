@@ -1,8 +1,10 @@
-
+import {execFile, spawn} from 'child_process';
+import {writeFile, unlinkSync} from 'fs';
+import * as path from 'path';
 export type JsContext = {
     openBlFile(blFile: string);
-    evalJs(jsStr:string);
-    exec(fun:Function);
+    evalJs(jsStr: string);
+    exec(fun: Function);
 }
 
 export class Blender {
@@ -28,24 +30,63 @@ export class Blender {
         return this;
     }
 
-    public appendContext(pyFile:string){
+    public appendContext(pyFile: string) {
 
     }
 
-    public appendPath(path:string){
+    public appendPath(path: string) {
 
     }
 
-    private setContext(){
+    private setContext() {
 
     }
 
-    public evalPy(str:string){
+    public evalPy(str: string) {
         return this;
     }
 
     /**最终形成一个python脚本传入blender运行 */
-    public run() {
+    public run(callback?: Function) {
+
+        var pyLibDir = path.join(__dirname,'../library');
+        var pyText = 
+`
+def main():
+    import sys
+    sys.path.append('${pyLibDir.replace(/\\/g,'\\\\')}')
+    from moduleA import funA
+    funA()
+    import moduleB
+
+
+if __name__ == '__main__':
+    main()
+`
+
+        var pyFile = path.join(__dirname, 'tmp.' +( Math.random() + '').split('.')[1] + '.py');
+        console.log('start exec this python script in blender (' + pyFile + ')')
+        console.log('################################################################################');
+        console.log(pyText)
+        console.log('################################################################################');  
+
+        writeFile(pyFile, pyText, () => {
+
+            const bl = spawn('blender', ['-b', '--python', pyFile]);
+
+            bl.stdout.on('data', (data) => {
+                console.log(`stdout: ${data}`);
+            });
+
+            bl.stderr.on('data', (data) => {
+                console.log(`stderr: ${data}`);
+            });
+
+            bl.on('close', (code) => {
+                console.log(`child process exited with code ${code}`);
+                unlinkSync(pyFile);
+            });
+        });
 
     }
 }
