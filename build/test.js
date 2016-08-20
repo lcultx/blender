@@ -1,18 +1,14 @@
 var blender_1 = require('./blender');
 var bl = new blender_1.Blender({
-    blender: "D:\\Program Files\\Blender Foundation\\Blender\\blender.exe"
+    blender: "C:\\Program Files\\Blender Foundation\\Blender\\blender.exe",
+    defaultScreen: '3D View Full',
+    defaultMode: 'EDIT',
 });
-bl.init();
-bl.then(function (ctx) {
-    ctx.evalJs('console.log("hello from js")');
-});
-bl.evalPy('print("hello from py")');
-bl.appendContext('test_append_context.py');
-bl.then(function (ctx) {
-    ctx.exec(function () {
-        console.log('Hello from js too..');
-    });
-    ctx.testFunction();
-});
-bl.run();
+bl.init()
+    .then(function () {
+    console.log("hello from js");
+})
+    .then(function (ctx) {
+    console.log('Hello from js too..');
+}).run();
 //# sourceMappingURL=test.js.map

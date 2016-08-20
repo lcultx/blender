@@ -1,22 +1,23 @@
-import {Blender,JsContext} from './blender';
+import {Blender, JsContext} from './blender';
 
 type Context = JsContext & {
-    testFunction();
-} 
+   testFunction();
+}
 
 var bl = new Blender({
-    blender:"D:\\Program Files\\Blender Foundation\\Blender\\blender.exe"
+   blender: "C:\\Program Files\\Blender Foundation\\Blender\\blender.exe",
+   //blender:"D:\\BlVray\\blender.exe",
+   //repl:"node",
+   //repl:"ipython",  
+   //display:"none",
+   defaultScreen: '3D View Full',
+   defaultMode: 'EDIT',
 });
-bl.init();
-bl.then(function(ctx:JsContext){
-    ctx.evalJs('console.log("hello from js")')
-});
-bl.evalPy('print("hello from py")');
-bl.appendContext('test_append_context.py');
-bl.then(function(ctx:Context){
-    ctx.exec(function(){
-        console.log('Hello from js too..')
-    });
-    ctx.testFunction();
-});
-bl.run();
+bl.init()
+   .then(function () {
+      console.log("hello from js")
+   })
+   //.evalPy('print("hello from py")')
+   .then(function (ctx: Context) {
+      console.log('Hello from js too..')
+   }).run();
