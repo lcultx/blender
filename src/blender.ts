@@ -119,7 +119,6 @@ def exec_js():
          var fun = this.jsFunctions[i];
          var funStr = fun.toString().replace(/[\r\n]/g, "");
          funStr = funStr.replace(/'/g,"\\'");
-         debugger
          var funScript = 
 `
     js2py.eval_js('(${funStr})()')
