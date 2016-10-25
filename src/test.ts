@@ -5,7 +5,8 @@ type Context = JsContext & {
 }
 
 var bl = new Blender({
-   blender: "C:\\Program Files\\Blender Foundation\\Blender\\blender.exe",
+   //blender: "C:\\Program Files\\Blender Foundation\\Blender\\blender.exe",
+   blender: "/Applications/blender.app/Contents/MacOS/blender",
    //blender:"D:\\BlVray\\blender.exe",
    //repl:"node",
    //repl:"ipython",  

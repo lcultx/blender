@@ -1,8 +1,11 @@
 {
-  "name": "blender",
+  "name": "node-blender",
   "version": "1.0.0",
   "description": "\"# blender\"",
   "main": "index.js",
+  "bin":{
+	  "bl":"./build/main.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
